@@ -1,0 +1,25 @@
+name: Deploy to Apps Script
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Clasp
+        run: sudo npm install -g @google/clasp
+
+      - name: Deploy Script
+        run: clasp push -f
+        
